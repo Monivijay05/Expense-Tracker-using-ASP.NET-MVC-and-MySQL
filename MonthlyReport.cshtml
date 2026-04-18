@@ -1,0 +1,41 @@
+﻿
+@model List<ExpenseTrackerPro.Models.MonthlyReportViewModel>
+@{
+    ViewBag.Title = "Monthly Report";
+    decimal grandTotal = 0;
+}
+
+<h2 class="mb-4">Current Month Report</h2>
+
+<table class="table table-bordered">
+    <thead class="table-success">
+        <tr>
+            <th>Category</th>
+            <th>Total Amount</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Count > 0)
+        {
+            foreach (var item in Model)
+            {
+                grandTotal += item.TotalAmount;
+                <tr>
+                    <td>@item.CategoryName</td>
+                    <td>₹ @item.TotalAmount</td>
+                </tr>
+            }
+
+            <tr class="table-warning">
+                <td><strong>Grand Total</strong></td>
+                <td><strong>₹ @grandTotal</strong></td>
+            </tr>
+        }
+        else
+        {
+            <tr>
+                <td colspan="2" class="text-center">No expense data for this month</td>
+            </tr>
+        }
+    </tbody>
+</table>

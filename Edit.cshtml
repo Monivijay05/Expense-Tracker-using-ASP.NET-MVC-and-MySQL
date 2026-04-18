@@ -1,0 +1,44 @@
+﻿@model ExpenseTrackerPro.Models.Expense
+@{
+    ViewBag.Title = "Edit Expense";
+}
+
+<h2 class="mb-4">Edit Expense</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(m => m.ExpenseId)
+
+    <div class="mb-3">
+        <label>Amount</label>
+        @Html.TextBoxFor(m => m.Amount, new { @class = "form-control", type = "number", step = "0.01" })
+        @Html.ValidationMessageFor(m => m.Amount, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="mb-3">
+        <label>Category</label>
+        @Html.DropDownListFor(m => m.CategoryId, (SelectList)ViewBag.Categories, "-- Select Category --", new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.CategoryId, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="mb-3">
+        <label>Date</label>
+        @Html.TextBoxFor(m => m.ExpenseDate, "{0:yyyy-MM-dd}", new { @class = "form-control", type = "date" })
+        @Html.ValidationMessageFor(m => m.ExpenseDate, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="mb-3">
+        <label>Payment Mode</label>
+        @Html.DropDownListFor(m => m.PaymentMode, (SelectList)ViewBag.PaymentModes, "-- Select Payment Mode --", new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.PaymentMode, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="mb-3">
+        <label>Description</label>
+        @Html.TextBoxFor(m => m.Description, new { @class = "form-control" })
+    </div>
+
+    <button type="submit" class="btn btn-warning">Update</button>
+    <a href="@Url.Action("Index", "Expense")" class="btn btn-secondary">Back</a>
+}
+
